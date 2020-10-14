@@ -1,5 +1,6 @@
 import random
 import string
+import os
 
 class RandomCredentialsGenerator():
 
@@ -15,27 +16,21 @@ class RandomCredentialsGenerator():
         digits = list(string.digits)
 
         characters_list = to_join(lower_letters,digits)
-        new_email = []
 
-        for i in range(self.email_lenght):
-            random_char = random.choice(characters_list)
-            new_email.append(random_char)
-
+        new_email = [random.choice(characters_list) for i in range(self.email_lenght)]
         new_email= "".join(new_email)
         email = new_email + '@test.com'
+
         return email
 
     def password_generator(self):
 
         characters_list = list(string.printable)
-        del characters_list[-10:]
-        new_password = []
+        del characters_list[-20:]
 
-        for i in range(self.password_lenght):
-            random_char = random.choice(characters_list)
-            new_password.append(random_char)
-
+        new_password = [random.choice(characters_list) for i in range(self.password_lenght)]
         new_password= "".join(new_password)
+
         return new_password
 
 class Validation():
@@ -45,6 +40,7 @@ class Validation():
 
     def input_lenght_validation(self,a,b):
         while True:
+            print('')
             credential_lenght = int(input(f'Please input {self.credential} lenght (between {a} and {b}): '))
     
             if a <= credential_lenght <= b:
@@ -61,14 +57,19 @@ class Console():
         pass
 
     def welcome(self):
+        os.system('clear')
 
         print('WELCOME')
+        print('')
         print('This program will help you create ramdom email and password for your testing')
         print('______________________________________________________________________________')
+        print('')
     
     def goodbye(self,new_email,new_password):
+        print('')
         print('Your new email is: ' + new_email)
-        print('Your new password is:' + new_password)
+        print('Your new password is: ' + new_password)
+        print('')
 
 
 if __name__ == '__main__':
@@ -83,7 +84,3 @@ if __name__ == '__main__':
     new_password = credentials.password_generator()
 
     Console().goodbye(new_email, new_password)
-
-
-
-     
